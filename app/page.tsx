@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react'; 
 
 const ASSETS = {
-  SHIKAMARU_BODY: 'https://i.imgur.com/etDvEDY.png',
+  SHIKAMARU_BODY: 'https://i.imgur.com/KCrx4J4.png',
   SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
   NARA_SYMBOL: 'https://i.imgur.com/etDvEDY.png'
 };
