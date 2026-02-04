@@ -145,8 +145,8 @@ export default function SeraNaraTacticalHUD() {
         </div>
       </div>
 
-      {/* --- 2. WEBCAM TÁTICA (MANTIDO IGUAL + MARCA D'ÁGUA) --- */}
-      <div className="absolute top-36 right-12 z-40">
+      {/* --- 2. WEBCAM TÁTICA (AGORA NO LADO ESQUERDO) --- */}
+      <div className="absolute top-36 left-12 z-40"> {/* Alterado de right-12 para left-12 */}
         <div className="relative w-[400px] aspect-video group">
            
            <div className="absolute -inset-4 smoke-effect opacity-30 pointer-events-none rounded-full blur-xl" />
