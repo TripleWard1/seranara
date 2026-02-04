@@ -7,8 +7,7 @@ import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react';
 const ASSETS = {
   SHIKAMARU_BODY: 'https://i.imgur.com/zzBQNiq.png',
   SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
-  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png',
-  GAME_BG: 'https://cdn2.unrealengine.com/marvel-rivals-gameplay-1920x1080-a6062b61e4b5.jpg' // Imagem de Fundo Adicionada
+  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png'
 };
 
 export default function SeraNaraTacticalHUD() {
@@ -84,17 +83,6 @@ export default function SeraNaraTacticalHUD() {
 
         .neon-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.4); }
       `}</style>
-
-      {/* --- BACKGROUND DE TESTE (MARVEL RIVALS) --- */}
-      <div className="absolute inset-0 z-0">
-        <img 
-            src={ASSETS.GAME_BG} 
-            alt="Game Background" 
-            className="w-full h-full object-cover opacity-100"
-        />
-        {/* Overlay escuro subtil apenas para simular a stream real se quiseres, removível */}
-        <div className="absolute inset-0 bg-black/10"></div>
-      </div>
 
       {/* --- 1. BARRA SUPERIOR PRO (PREMIUM & IMERSIVA) --- */}
       <div className="absolute top-0 left-0 w-full flex justify-center z-50"> 
