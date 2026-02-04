@@ -40,13 +40,13 @@ export default function SeraNaraTacticalHUD() {
         /* Padrão de Grelha Tática */
         .tech-grid {
           background-image: 
-            linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(74, 222, 128, 0.1) 1px, transparent 1px);
+            linear-gradient(rgba(74, 222, 128, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(74, 222, 128, 0.05) 1px, transparent 1px);
           background-size: 10px 10px;
         }
 
         .scanline {
-          background: linear-gradient(to bottom, rgba(74,222,128,0), rgba(74,222,128,0.05) 50%, rgba(74,222,128,0));
+          background: linear-gradient(to bottom, rgba(74,222,128,0), rgba(74,222,128,0.02) 50%, rgba(74,222,128,0));
           background-size: 100% 3px;
           animation: scan 8s linear infinite;
           pointer-events: none;
@@ -82,7 +82,7 @@ export default function SeraNaraTacticalHUD() {
           100% { opacity: 0.6; transform: scale(1.1); }
         }
 
-        .neon-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.6); }
+        .neon-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.4); }
       `}</style>
 
       {/* --- BACKGROUND DE TESTE (MARVEL RIVALS) --- */}
@@ -103,12 +103,12 @@ export default function SeraNaraTacticalHUD() {
           {/* LADO ESQUERDO */}
           <div className="mt-4 relative">
              {/* Conector Decorativo */}
-             <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/20 z-0 transform skew-x-[20deg]" />
+             <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/10 z-0 transform skew-x-[20deg]" />
              
              <TacticalWing side="left">
                 <StatItem icon={<User size={14} />} label="LAST SUB" />
                 {/* Separador Premium */}
-                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-8 skew-x-[20deg]" />
+                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/30 to-transparent mx-8 skew-x-[20deg]" />
                 <StatItem icon={<Heart size={14} />} label="LAST FOLLOWER" />
              </TacticalWing>
           </div>
@@ -117,14 +117,14 @@ export default function SeraNaraTacticalHUD() {
           <div className="relative flex flex-col items-center z-20 mx-[-15px] mt-4">
              
              {/* Placa do Nome */}
-             <div className="h-14 flex flex-col justify-center items-center px-16 bg-gradient-to-b from-black/95 via-black/85 to-transparent backdrop-blur-xl border-b border-[#4ade80]/60 clip-path-trapezoid relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+             <div className="h-14 flex flex-col justify-center items-center px-16 bg-gradient-to-b from-black/95 via-black/90 to-transparent backdrop-blur-xl border-b border-[#4ade80]/40 clip-path-trapezoid relative overflow-hidden shadow-lg">
                 
                 {/* Textura de Fundo Tech */}
                 <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
                 <div className="smoke-effect absolute inset-0 pointer-events-none" />
                 
                 {/* Borda Superior Brilhante (Efeito Vidro) */}
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
                 <div className="flex flex-col items-center pt-1 z-10">
                    <h1 className="font-ninja text-4xl tracking-tighter neon-text leading-none drop-shadow-lg">
@@ -133,9 +133,9 @@ export default function SeraNaraTacticalHUD() {
                    
                    {/* LIVE INDICATOR (Sem texto, apenas pulso e sinal) */}
                    <div className="flex items-center gap-2 mt-1 opacity-80">
-                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/30 to-transparent" />
                       <Radio size={8} className="text-red-500 animate-pulse drop-shadow-[0_0_5px_red]" />
-                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/30 to-transparent" />
                    </div>
                 </div>
              </div>
@@ -144,12 +144,12 @@ export default function SeraNaraTacticalHUD() {
           {/* LADO DIREITO */}
           <div className="mt-4 relative">
              {/* Conector Decorativo */}
-             <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/20 z-0 transform -skew-x-[20deg]" />
+             <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/10 z-0 transform -skew-x-[20deg]" />
 
              <TacticalWing side="right">
                 <StatItem icon={<DollarSign size={14} />} label="DONATION" />
                 {/* Separador Premium */}
-                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-8 -skew-x-[20deg]" />
+                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/30 to-transparent mx-8 -skew-x-[20deg]" />
                 <StatItem icon={<Zap size={14} />} label="BITS" />
              </TacticalWing>
           </div>
@@ -209,13 +209,13 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
   const skew = side === 'left' ? 'skew-x-[20deg]' : '-skew-x-[20deg]';
   const unSkew = side === 'left' ? '-skew-x-[20deg]' : 'skew-x-[20deg]';
   
-  // Gradiente melhorado para parecer vidro fumado tech
+  // Gradiente melhorado para parecer vidro fumado tech (MAIS ESCURO E FOSCO)
   const gradient = side === 'left' 
-    ? 'bg-gradient-to-r from-transparent via-black/80 to-black/95' 
-    : 'bg-gradient-to-l from-transparent via-black/80 to-black/95';
+    ? 'bg-gradient-to-r from-transparent via-black/90 to-black/95' 
+    : 'bg-gradient-to-l from-transparent via-black/90 to-black/95';
 
   return (
-    <div className={`h-14 flex items-center px-12 border-b border-[#4ade80]/40 border-t border-t-white/5 backdrop-blur-md shadow-lg ${skew} ${gradient} relative overflow-hidden`}>
+    <div className={`h-14 flex items-center px-12 border-b border-[#4ade80]/20 border-t border-t-white/5 backdrop-blur-md shadow-lg ${skew} ${gradient} relative overflow-hidden`}>
        {/* Grelha subtil no fundo */}
        <div className={`absolute inset-0 tech-grid opacity-10 ${unSkew}`} />
        
@@ -243,5 +243,5 @@ const CornerMarker = ({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) => 
       bl: 'bottom-0 left-0 border-b-2 border-l-2',
       br: 'bottom-0 right-0 border-b-2 border-r-2'
    };
-   return <div className={`absolute w-3 h-3 border-[#4ade80] ${styles[position]} opacity-80 shadow-[0_0_5px_#4ade80]`} />;
+   return <div className={`absolute w-3 h-3 border-[#4ade80] ${styles[position]} opacity-60 shadow-[0_0_5px_#4ade80]`} />;
 };
