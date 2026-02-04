@@ -97,11 +97,11 @@ export default function SeraNaraTacticalHUD() {
       </div>
 
       {/* --- 1. BARRA SUPERIOR PRO (PREMIUM & IMERSIVA) --- */}
-      <div className="absolute top-0 left-0 w-full flex justify-center pt-2 z-50">
+      <div className="absolute top-0 left-0 w-full flex justify-center z-50"> 
         <div className="relative flex items-start gap-0"> 
           
           {/* LADO ESQUERDO */}
-          <div className="mt-4 relative">
+          <div className="mt-0 relative"> 
              {/* Conector Decorativo */}
              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/10 z-0 transform skew-x-[20deg]" />
              
@@ -113,8 +113,8 @@ export default function SeraNaraTacticalHUD() {
              </TacticalWing>
           </div>
 
-          {/* CENTRO (NOME PREMIUM) */}
-          <div className="relative flex flex-col items-center z-20 mx-[-15px] mt-4">
+          {/* CENTRO (NOME PREMIUM COM ANIMAÇÃO) */}
+          <div className="relative flex flex-col items-center z-20 mx-[-15px]"> 
              
              {/* Placa do Nome */}
              <div className="h-14 flex flex-col justify-center items-center px-16 bg-gradient-to-b from-black/95 via-black/90 to-transparent backdrop-blur-xl border-b border-[#4ade80]/40 clip-path-trapezoid relative overflow-hidden shadow-lg">
@@ -127,9 +127,14 @@ export default function SeraNaraTacticalHUD() {
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
                 <div className="flex flex-col items-center pt-1 z-10">
-                   <h1 className="font-ninja text-4xl tracking-tighter neon-text leading-none drop-shadow-lg">
+                   {/* ANIMAÇÃO SUBTIL NO NOME AQUI */}
+                   <motion.h1 
+                      className="font-ninja text-4xl tracking-tighter neon-text leading-none drop-shadow-lg"
+                      animate={{ scale: [1, 1.03, 1] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                   >
                       SERA <span className="text-[#4ade80]">NARA</span>
-                   </h1>
+                   </motion.h1>
                    
                    {/* LIVE INDICATOR (Sem texto, apenas pulso e sinal) */}
                    <div className="flex items-center gap-2 mt-1 opacity-80">
@@ -142,7 +147,7 @@ export default function SeraNaraTacticalHUD() {
           </div>
 
           {/* LADO DIREITO */}
-          <div className="mt-4 relative">
+          <div className="mt-0 relative"> 
              {/* Conector Decorativo */}
              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/10 z-0 transform -skew-x-[20deg]" />
 
@@ -228,9 +233,9 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
 
 const StatItem = ({ icon, label }: { icon: any, label: string }) => (
   <div className="flex flex-col items-center min-w-[100px] group">
-     <div className="flex items-center gap-1.5 text-[#4ade80] mb-1 opacity-80 group-hover:opacity-100 transition-opacity">
+     <div className="flex items-center gap-1.5 text-[#4ade80] mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
         {icon}
-        <span className="font-hud text-[10px] font-bold tracking-widest">{label}</span>
+        <span className="font-hud text-[10px] font-bold tracking-widest text-white/80">{label}</span>
      </div>
      <div className="h-5 w-full bg-white/5 rounded-sm border border-white/5"></div> 
   </div>
