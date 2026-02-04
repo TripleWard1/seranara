@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion'; // Requer: npm install framer-motion lucide-react
-import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react';
+import { motion } from 'framer-motion'; 
+import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react'; 
 
-// ASSETS CORRIGIDOS (Mantive a constante original para o Chibi da WebCam)
-const SHIKAMARU_CHIBI = 'https://i.imgur.com/etDvEDY.png'; // Chibi na webcam
-const SHIKAMARU_HEAD = 'https://i.imgur.com/rq4bWai.png';   // Cabeça no Topo
-const NARA_SYMBOL = 'https://i.imgur.com/etDvEDY.png';
+const ASSETS = {
+  SHIKAMARU_BODY: 'https://i.imgur.com/etDvEDY.png',
+  SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
+  NARA_SYMBOL: 'https://i.imgur.com/etDvEDY.png'
+};
 
 export default function SeraNaraTacticalHUD() {
   const [time, setTime] = useState('');
@@ -35,7 +36,36 @@ export default function SeraNaraTacticalHUD() {
         .font-hud { font-family: 'Space Grotesk', sans-serif; }
         .font-naruto { font-family: 'Shojumaru', system-ui; }
 
-        /* Fumo do Naruto (Efeito de fundo subtil) */
+        /* Scanline Tática */
+        .scanline {
+          background: linear-gradient(to bottom, rgba(74,222,128,0), rgba(74,222,128,0.05) 50%, rgba(74,222,128,0));
+          background-size: 100% 3px;
+          animation: scan 8s linear infinite;
+          pointer-events: none;
+        }
+
+        @keyframes scan {
+          from { background-position: 0 -100vh; }
+          to { background-position: 0 100vh; }
+        }
+
+        /* ANIMAÇÃO DE FUMO DE JUTSU (NARUTO STYLE) */
+        .jutsu-smoke {
+          position: absolute;
+          background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(200,200,200,0) 70%);
+          border-radius: 50%;
+          filter: blur(8px);
+          opacity: 0;
+          animation: smoke-rise 3s infinite ease-out;
+        }
+
+        @keyframes smoke-rise {
+          0% { transform: scale(0.5) translateY(10px); opacity: 0; }
+          20% { opacity: 0.6; }
+          100% { transform: scale(2.5) translateY(-40px); opacity: 0; }
+        }
+
+        /* Efeito de fumo ambiente (fundo) */
         .smoke-effect {
           background: radial-gradient(circle at center, rgba(74, 222, 128, 0.05), transparent 70%);
           animation: smoke-pulse 4s ease-in-out infinite alternate;
@@ -51,24 +81,22 @@ export default function SeraNaraTacticalHUD() {
 
       {/* --- 1. BARRA SUPERIOR PRO (LAYOUT WIDE) --- */}
       <div className="absolute top-0 left-0 w-full flex justify-center pt-2 z-50">
-        <div className="relative flex items-start gap-1"> {/* Gap reduzido para unir as peças */}
+        <div className="relative flex items-start gap-1">
           
-          {/* LADO ESQUERDO (Stats Sociais) */}
-          {/* Puxei mais para cima (mt-4 em vez de mt-8) para alinhar com o topo da cabeça */}
+          {/* LADO ESQUERDO */}
           <div className="mt-4">
              <TacticalWing side="left">
-                {/* Removi o value="N/A" para deixar espaço em branco */}
                 <StatItem icon={<User size={14} />} label="LAST SUB" />
-                <div className="h-8 w-[1px] bg-white/10 mx-8 skew-x-[20deg]" /> {/* Mais espaço (mx-8) */}
+                <div className="h-8 w-[1px] bg-white/10 mx-8 skew-x-[20deg]" />
                 <StatItem icon={<Heart size={14} />} label="FOLLOWER" />
              </TacticalWing>
           </div>
 
-          {/* CENTRO (Logo + Cabeça Integrada) */}
-          <div className="relative flex flex-col items-center z-20 mx-[-20px]"> {/* Margem negativa para unir */}
+          {/* CENTRO (Logo + Cabeça) */}
+          <div className="relative flex flex-col items-center z-20 mx-[-20px]">
              
-             {/* Cabeça do Shikamaru no topo (Brasão) */}
-             <div className="relative -mb-12 z-30 transform scale-90"> {/* scale-90 para ajustar tamanho */}
+             {/* Cabeça do Shikamaru no topo */}
+             <div className="relative -mb-12 z-30 transform scale-90">
                 <motion.div 
                   className="absolute inset-0 w-full h-full border-2 border-dashed border-[#4ade80]/40 rounded-full"
                   animate={{ rotate: 360 }}
@@ -77,14 +105,14 @@ export default function SeraNaraTacticalHUD() {
                 
                 <div className="w-24 h-24 rounded-full bg-black/80 backdrop-blur-md border border-[#4ade80]/60 flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(74,222,128,0.2)]">
                    <img 
-                     src={SHIKAMARU_HEAD} 
+                     src={ASSETS.SHIKAMARU_HEAD} 
                      className="w-20 h-20 object-contain mt-3" 
                      alt="Shikamaru Head"
                    />
                 </div>
              </div>
 
-             {/* Placa do Nome Central */}
+             {/* Placa do Nome */}
              <div className="pt-14 pb-2 px-20 bg-gradient-to-b from-black/95 via-black/80 to-transparent backdrop-blur-lg border-b border-[#4ade80]/50 clip-path-trapezoid relative">
                 <div className="smoke-effect absolute inset-0 pointer-events-none" />
                 
@@ -97,14 +125,14 @@ export default function SeraNaraTacticalHUD() {
                    <div className="flex items-center gap-2 mt-2 bg-[#4ade80]/5 border border-[#4ade80]/20 px-4 py-0.5 rounded-sm">
                       <Radio size={10} className="text-red-500 animate-pulse" />
                       <span className="font-hud text-[10px] font-bold tracking-[0.3em] text-[#4ade80]">
-                         TACTICAL LIVE // {time}
+                         HIDDEN LEAF VILLAGE // {time}
                       </span>
                    </div>
                 </div>
              </div>
           </div>
 
-          {/* LADO DIREITO (Stats Dinheiro) */}
+          {/* LADO DIREITO */}
           <div className="mt-4">
              <TacticalWing side="right">
                 <StatItem icon={<DollarSign size={14} />} label="DONATION" />
@@ -120,27 +148,37 @@ export default function SeraNaraTacticalHUD() {
       <div className="absolute top-36 right-12 z-40">
         <div className="relative w-[400px] aspect-video group">
            
-           {/* Fundo subtil de fumo ninja */}
+           {/* Fundo subtil */}
            <div className="absolute -inset-4 smoke-effect opacity-30 pointer-events-none rounded-full blur-xl" />
 
-           {/* Marcadores de Canto */}
+           {/* Marcadores */}
            <CornerMarker position="tl" />
            <CornerMarker position="tr" />
            <CornerMarker position="bl" />
            <CornerMarker position="br" />
 
-           {/* CHIBI PEQUENO (Imersivo por baixo) */}
+           {/* CHIBI PEQUENO + FUMO (Imersivo por baixo) */}
            <div className="absolute -left-4 -bottom-8 z-50 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+              
+              {/* CAMADA DE FUMO DO NARUTO (Atrás do Chibi) */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none z-0">
+                 {/* Várias nuvens de fumo com delays diferentes */}
+                 <div className="jutsu-smoke w-16 h-16 left-0 bottom-0" style={{ animationDelay: '0s' }} />
+                 <div className="jutsu-smoke w-12 h-12 left-8 bottom-2" style={{ animationDelay: '1s' }} />
+                 <div className="jutsu-smoke w-14 h-14 right-2 bottom-0" style={{ animationDelay: '2s' }} />
+              </div>
+
+              {/* CHIBI (À frente do fumo) */}
               <motion.img
-                 src={SHIKAMARU_CHIBI} // Usa a constante original
+                 src={ASSETS.SHIKAMARU_BODY}
                  alt="Guard"
-                 className="w-24 h-24 object-contain" // Mais pequeno
+                 className="w-24 h-24 object-contain relative z-10" 
                  animate={{ y: [0, -2, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
            </div>
 
-           {/* Etiqueta da Webcam (Kage Mane) */}
+           {/* Etiqueta da Webcam */}
            <div className="absolute -top-3 right-0">
               <div className="bg-black/80 backdrop-blur px-3 py-1 border-l-2 border-[#4ade80] transform -skew-x-12 shadow-lg">
                  <span className="font-naruto text-[10px] font-bold text-[#4ade80] tracking-wider not-italic">
@@ -158,11 +196,9 @@ export default function SeraNaraTacticalHUD() {
 
 // --- COMPONENTES AUXILIARES ---
 
-// Asas Laterais (Mais largas e transparentes para evitar blocos pretos)
 const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'left' | 'right' }) => {
   const skew = side === 'left' ? 'skew-x-[20deg]' : '-skew-x-[20deg]';
   const unSkew = side === 'left' ? '-skew-x-[20deg]' : 'skew-x-[20deg]';
-  // Gradiente suave para transparência
   const gradient = side === 'left' 
     ? 'bg-gradient-to-r from-transparent via-black/70 to-black/90' 
     : 'bg-gradient-to-l from-transparent via-black/70 to-black/90';
@@ -176,14 +212,12 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
   );
 };
 
-// Item de Estatística (Com espaço em branco para o Streamlabs)
 const StatItem = ({ icon, label }: { icon: any, label: string }) => (
-  <div className="flex flex-col items-center min-w-[100px]"> {/* min-w-100px para dar espaço ao nome */}
+  <div className="flex flex-col items-center min-w-[100px]">
      <div className="flex items-center gap-1.5 text-[#4ade80] mb-1 opacity-90">
         {icon}
         <span className="font-hud text-[10px] font-bold tracking-widest">{label}</span>
      </div>
-     {/* Área vazia para o Streamlabs preencher */}
      <div className="h-5 w-full"></div> 
   </div>
 );
