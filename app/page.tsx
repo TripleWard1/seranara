@@ -7,7 +7,8 @@ import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react';
 const ASSETS = {
   SHIKAMARU_BODY: 'https://i.imgur.com/zzBQNiq.png',
   SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
-  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png' // Link atualizado conforme pedido
+  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png',
+  GAME_BG: 'https://cdn2.unrealengine.com/marvel-rivals-gameplay-1920x1080-a6062b61e4b5.jpg' // Imagem de Fundo Adicionada
 };
 
 export default function SeraNaraTacticalHUD() {
@@ -36,7 +37,7 @@ export default function SeraNaraTacticalHUD() {
         .font-hud { font-family: 'Space Grotesk', sans-serif; }
         .font-naruto { font-family: 'Shojumaru', system-ui; }
 
-        /* Padrão de Grelha Tática (Novo Efeito Premium) */
+        /* Padrão de Grelha Tática */
         .tech-grid {
           background-image: 
             linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
@@ -83,6 +84,17 @@ export default function SeraNaraTacticalHUD() {
 
         .neon-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.6); }
       `}</style>
+
+      {/* --- BACKGROUND DE TESTE (MARVEL RIVALS) --- */}
+      <div className="absolute inset-0 z-0">
+        <img 
+            src={ASSETS.GAME_BG} 
+            alt="Game Background" 
+            className="w-full h-full object-cover opacity-100"
+        />
+        {/* Overlay escuro subtil apenas para simular a stream real se quiseres, removível */}
+        <div className="absolute inset-0 bg-black/10"></div>
+      </div>
 
       {/* --- 1. BARRA SUPERIOR PRO (PREMIUM & IMERSIVA) --- */}
       <div className="absolute top-0 left-0 w-full flex justify-center pt-2 z-50">
@@ -145,8 +157,8 @@ export default function SeraNaraTacticalHUD() {
         </div>
       </div>
 
-      {/* --- 2. WEBCAM TÁTICA (AGORA NO LADO ESQUERDO) --- */}
-      <div className="absolute top-36 left-12 z-40"> {/* Alterado de right-12 para left-12 */}
+      {/* --- 2. WEBCAM TÁTICA (LADO ESQUERDO) --- */}
+      <div className="absolute top-36 left-12 z-40">
         <div className="relative w-[400px] aspect-video group">
            
            <div className="absolute -inset-4 smoke-effect opacity-30 pointer-events-none rounded-full blur-xl" />
@@ -167,14 +179,14 @@ export default function SeraNaraTacticalHUD() {
                  />
               </div>
 
-              {/* CAMADA DE FUMO DO NARUTO (Atrás do Chibi, mas à frente do Símbolo) */}
+              {/* CAMADA DE FUMO DO NARUTO */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none z-0">
                  <div className="jutsu-smoke w-16 h-16 left-0 bottom-0" style={{ animationDelay: '0s' }} />
                  <div className="jutsu-smoke w-12 h-12 left-8 bottom-2" style={{ animationDelay: '1s' }} />
                  <div className="jutsu-smoke w-14 h-14 right-2 bottom-0" style={{ animationDelay: '2s' }} />
               </div>
 
-              {/* CHIBI (FRENTE DE TUDO) */}
+              {/* CHIBI */}
               <motion.img
                  src={ASSETS.SHIKAMARU_BODY}
                  alt="Guard"
