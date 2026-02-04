@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import { User, Heart, DollarSign, Zap, Radio } from 'lucide-react'; 
 
 const ASSETS = {
-  SHIKAMARU_BODY: 'https://i.imgur.com/KCrx4J4.png',
+  SHIKAMARU_BODY: 'https://i.imgur.com/zzBQNiq.png',
   SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
-  NARA_SYMBOL: 'https://i.imgur.com/etDvEDY.png'
+  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png' // Link atualizado conforme pedido
 };
 
 export default function SeraNaraTacticalHUD() {
@@ -36,7 +36,14 @@ export default function SeraNaraTacticalHUD() {
         .font-hud { font-family: 'Space Grotesk', sans-serif; }
         .font-naruto { font-family: 'Shojumaru', system-ui; }
 
-        /* Scanline Tática */
+        /* Padrão de Grelha Tática (Novo Efeito Premium) */
+        .tech-grid {
+          background-image: 
+            linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(74, 222, 128, 0.1) 1px, transparent 1px);
+          background-size: 10px 10px;
+        }
+
         .scanline {
           background: linear-gradient(to bottom, rgba(74,222,128,0), rgba(74,222,128,0.05) 50%, rgba(74,222,128,0));
           background-size: 100% 3px;
@@ -49,7 +56,6 @@ export default function SeraNaraTacticalHUD() {
           to { background-position: 0 100vh; }
         }
 
-        /* ANIMAÇÃO DE FUMO DE JUTSU (NARUTO STYLE) */
         .jutsu-smoke {
           position: absolute;
           background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(200,200,200,0) 70%);
@@ -65,7 +71,6 @@ export default function SeraNaraTacticalHUD() {
           100% { transform: scale(2.5) translateY(-40px); opacity: 0; }
         }
 
-        /* Efeito de fumo ambiente (fundo) */
         .smoke-effect {
           background: radial-gradient(circle at center, rgba(74, 222, 128, 0.05), transparent 70%);
           animation: smoke-pulse 4s ease-in-out infinite alternate;
@@ -79,64 +84,60 @@ export default function SeraNaraTacticalHUD() {
         .neon-text { text-shadow: 0 0 10px rgba(74, 222, 128, 0.6); }
       `}</style>
 
-      {/* --- 1. BARRA SUPERIOR PRO (LAYOUT WIDE) --- */}
+      {/* --- 1. BARRA SUPERIOR PRO (PREMIUM & IMERSIVA) --- */}
       <div className="absolute top-0 left-0 w-full flex justify-center pt-2 z-50">
-        <div className="relative flex items-start gap-1">
+        <div className="relative flex items-start gap-0"> 
           
           {/* LADO ESQUERDO */}
-          <div className="mt-4">
+          <div className="mt-4 relative">
+             {/* Conector Decorativo */}
+             <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/20 z-0 transform skew-x-[20deg]" />
+             
              <TacticalWing side="left">
                 <StatItem icon={<User size={14} />} label="LAST SUB" />
-                <div className="h-8 w-[1px] bg-white/10 mx-8 skew-x-[20deg]" />
-                <StatItem icon={<Heart size={14} />} label="FOLLOWER" />
+                {/* Separador Premium */}
+                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-8 skew-x-[20deg]" />
+                <StatItem icon={<Heart size={14} />} label="LAST FOLLOWER" />
              </TacticalWing>
           </div>
 
-          {/* CENTRO (Logo + Cabeça) */}
-          <div className="relative flex flex-col items-center z-20 mx-[-20px]">
+          {/* CENTRO (NOME PREMIUM) */}
+          <div className="relative flex flex-col items-center z-20 mx-[-15px] mt-4">
              
-             {/* Cabeça do Shikamaru no topo */}
-             <div className="relative -mb-12 z-30 transform scale-90">
-                <motion.div 
-                  className="absolute inset-0 w-full h-full border-2 border-dashed border-[#4ade80]/40 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                
-                <div className="w-24 h-24 rounded-full bg-black/80 backdrop-blur-md border border-[#4ade80]/60 flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(74,222,128,0.2)]">
-                   <img 
-                     src={ASSETS.SHIKAMARU_HEAD} 
-                     className="w-20 h-20 object-contain mt-3" 
-                     alt="Shikamaru Head"
-                   />
-                </div>
-             </div>
-
              {/* Placa do Nome */}
-             <div className="pt-14 pb-2 px-20 bg-gradient-to-b from-black/95 via-black/80 to-transparent backdrop-blur-lg border-b border-[#4ade80]/50 clip-path-trapezoid relative">
+             <div className="h-14 flex flex-col justify-center items-center px-16 bg-gradient-to-b from-black/95 via-black/85 to-transparent backdrop-blur-xl border-b border-[#4ade80]/60 clip-path-trapezoid relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                
+                {/* Textura de Fundo Tech */}
+                <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
                 <div className="smoke-effect absolute inset-0 pointer-events-none" />
                 
-                <div className="flex flex-col items-center">
-                   <h1 className="font-ninja text-5xl tracking-tighter neon-text leading-none mt-1 drop-shadow-md">
+                {/* Borda Superior Brilhante (Efeito Vidro) */}
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                <div className="flex flex-col items-center pt-1 z-10">
+                   <h1 className="font-ninja text-4xl tracking-tighter neon-text leading-none drop-shadow-lg">
                       SERA <span className="text-[#4ade80]">NARA</span>
                    </h1>
                    
-                   {/* LIVE TAG */}
-                   <div className="flex items-center gap-2 mt-2 bg-[#4ade80]/5 border border-[#4ade80]/20 px-4 py-0.5 rounded-sm">
-                      <Radio size={10} className="text-red-500 animate-pulse" />
-                      <span className="font-hud text-[10px] font-bold tracking-[0.3em] text-[#4ade80]">
-                         HIDDEN LEAF VILLAGE // {time}
-                      </span>
+                   {/* LIVE INDICATOR (Sem texto, apenas pulso e sinal) */}
+                   <div className="flex items-center gap-2 mt-1 opacity-80">
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
+                      <Radio size={8} className="text-red-500 animate-pulse drop-shadow-[0_0_5px_red]" />
+                      <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
                    </div>
                 </div>
              </div>
           </div>
 
           {/* LADO DIREITO */}
-          <div className="mt-4">
+          <div className="mt-4 relative">
+             {/* Conector Decorativo */}
+             <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-2 bg-[#4ade80]/20 z-0 transform -skew-x-[20deg]" />
+
              <TacticalWing side="right">
                 <StatItem icon={<DollarSign size={14} />} label="DONATION" />
-                <div className="h-8 w-[1px] bg-white/10 mx-8 -skew-x-[20deg]" />
+                {/* Separador Premium */}
+                <div className="h-6 w-[2px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-8 -skew-x-[20deg]" />
                 <StatItem icon={<Zap size={14} />} label="BITS" />
              </TacticalWing>
           </div>
@@ -144,31 +145,36 @@ export default function SeraNaraTacticalHUD() {
         </div>
       </div>
 
-      {/* --- 2. WEBCAM TÁTICA --- */}
+      {/* --- 2. WEBCAM TÁTICA (MANTIDO IGUAL + MARCA D'ÁGUA) --- */}
       <div className="absolute top-36 right-12 z-40">
         <div className="relative w-[400px] aspect-video group">
            
-           {/* Fundo subtil */}
            <div className="absolute -inset-4 smoke-effect opacity-30 pointer-events-none rounded-full blur-xl" />
 
-           {/* Marcadores */}
            <CornerMarker position="tl" />
            <CornerMarker position="tr" />
            <CornerMarker position="bl" />
            <CornerMarker position="br" />
 
-           {/* CHIBI PEQUENO + FUMO (Imersivo por baixo) */}
            <div className="absolute -left-4 -bottom-8 z-50 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
               
-              {/* CAMADA DE FUMO DO NARUTO (Atrás do Chibi) */}
+              {/* SÍMBOLO NARA (MARCA D'ÁGUA ATRÁS DO CHIBI) */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 z-0 opacity-40 pointer-events-none">
+                 <img 
+                    src={ASSETS.NARA_SYMBOL} 
+                    alt="Nara Clan" 
+                    className="w-full h-full object-contain rotate-[-10deg]"
+                 />
+              </div>
+
+              {/* CAMADA DE FUMO DO NARUTO (Atrás do Chibi, mas à frente do Símbolo) */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none z-0">
-                 {/* Várias nuvens de fumo com delays diferentes */}
                  <div className="jutsu-smoke w-16 h-16 left-0 bottom-0" style={{ animationDelay: '0s' }} />
                  <div className="jutsu-smoke w-12 h-12 left-8 bottom-2" style={{ animationDelay: '1s' }} />
                  <div className="jutsu-smoke w-14 h-14 right-2 bottom-0" style={{ animationDelay: '2s' }} />
               </div>
 
-              {/* CHIBI (À frente do fumo) */}
+              {/* CHIBI (FRENTE DE TUDO) */}
               <motion.img
                  src={ASSETS.SHIKAMARU_BODY}
                  alt="Guard"
@@ -176,15 +182,6 @@ export default function SeraNaraTacticalHUD() {
                  animate={{ y: [0, -2, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
-           </div>
-
-           {/* Etiqueta da Webcam */}
-           <div className="absolute -top-3 right-0">
-              <div className="bg-black/80 backdrop-blur px-3 py-1 border-l-2 border-[#4ade80] transform -skew-x-12 shadow-lg">
-                 <span className="font-naruto text-[10px] font-bold text-[#4ade80] tracking-wider not-italic">
-                    Kage Mane no Jutsu
-                 </span>
-              </div>
            </div>
 
         </div>
@@ -199,13 +196,18 @@ export default function SeraNaraTacticalHUD() {
 const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'left' | 'right' }) => {
   const skew = side === 'left' ? 'skew-x-[20deg]' : '-skew-x-[20deg]';
   const unSkew = side === 'left' ? '-skew-x-[20deg]' : 'skew-x-[20deg]';
+  
+  // Gradiente melhorado para parecer vidro fumado tech
   const gradient = side === 'left' 
-    ? 'bg-gradient-to-r from-transparent via-black/70 to-black/90' 
-    : 'bg-gradient-to-l from-transparent via-black/70 to-black/90';
+    ? 'bg-gradient-to-r from-transparent via-black/80 to-black/95' 
+    : 'bg-gradient-to-l from-transparent via-black/80 to-black/95';
 
   return (
-    <div className={`h-14 flex items-center px-12 border-b border-[#4ade80]/40 backdrop-blur-sm ${skew} ${gradient}`}>
-       <div className={`flex items-center ${unSkew} w-full justify-between`}>
+    <div className={`h-14 flex items-center px-12 border-b border-[#4ade80]/40 border-t border-t-white/5 backdrop-blur-md shadow-lg ${skew} ${gradient} relative overflow-hidden`}>
+       {/* Grelha subtil no fundo */}
+       <div className={`absolute inset-0 tech-grid opacity-10 ${unSkew}`} />
+       
+       <div className={`flex items-center ${unSkew} w-full justify-between relative z-10`}>
           {children}
        </div>
     </div>
@@ -213,12 +215,12 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
 };
 
 const StatItem = ({ icon, label }: { icon: any, label: string }) => (
-  <div className="flex flex-col items-center min-w-[100px]">
-     <div className="flex items-center gap-1.5 text-[#4ade80] mb-1 opacity-90">
+  <div className="flex flex-col items-center min-w-[100px] group">
+     <div className="flex items-center gap-1.5 text-[#4ade80] mb-1 opacity-80 group-hover:opacity-100 transition-opacity">
         {icon}
         <span className="font-hud text-[10px] font-bold tracking-widest">{label}</span>
      </div>
-     <div className="h-5 w-full"></div> 
+     <div className="h-5 w-full bg-white/5 rounded-sm border border-white/5"></div> 
   </div>
 );
 
