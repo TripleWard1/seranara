@@ -159,7 +159,7 @@ export default function SeraNaraTacticalHUD() {
            <div className="absolute -left-4 -bottom-8 z-50 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
               
               {/* SÍMBOLO NARA (MARCA D'ÁGUA ATRÁS DO CHIBI) */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 z-0 opacity-40 pointer-events-none">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-0 opacity-40 pointer-events-none">
                  <img 
                     src={ASSETS.NARA_SYMBOL} 
                     alt="Nara Clan" 
