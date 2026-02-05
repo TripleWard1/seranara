@@ -42,15 +42,11 @@ export default function RaidAlert() {
         {visible && (
           <div className="relative flex flex-col items-center">
             
-            {/* Sombras Verticais Estilizadas */}
+            {/* Sombras Verticais Estilizadas - Barra Central Removida */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
                <motion.div 
                 initial={{ height: 0 }} animate={{ height: '200vh' }}
                 className="shadow-beam" style={{ left: '-150px' }} 
-               />
-               <motion.div 
-                initial={{ height: 0 }} animate={{ height: '250vh' }}
-                className="shadow-beam" style={{ width: '4px' }} 
                />
                <motion.div 
                 initial={{ height: 0 }} animate={{ height: '200vh' }}
