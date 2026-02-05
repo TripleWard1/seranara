@@ -134,7 +134,7 @@ export default function PremiumFollowerAlert() {
                 className="mt-6 flex flex-col items-center"
               >
                 <p className="font-ninja text-[#4ade80] text-sm italic tracking-widest">
-   &quot;What a drag... but thanks for the donation!&quot;
+   &quot;What a drag... but thanks for the sub!&quot;
 </p>
                 <div className="w-1/2 h-[2px] mt-1 bg-[#4ade80]/20 rounded-full" />
               </motion.div>
