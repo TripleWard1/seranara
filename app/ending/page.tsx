@@ -112,7 +112,7 @@ export default function NaraUltimateScreen() {
           <h1 className="font-black italic text-7xl md:text-[140px] leading-[0.85] tracking-tighter text-white">
             STREAM <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-[#4ade80] to-[#166534] drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]">
-              STARTING
+              ENDING
             </span>
           </h1>
 
@@ -121,7 +121,7 @@ export default function NaraUltimateScreen() {
             <div className="flex items-center gap-6">
               <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#4ade80]/50" />
               <p className="text-white/80 font-bold tracking-[0.5em] text-lg">
-                NARA CLAN, KONNICHIWA !
+                NARA CLAN, MATANE !
               </p>
               <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#4ade80]/50" />
             </div>
