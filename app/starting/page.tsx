@@ -131,7 +131,7 @@ export default function NaraUltimateScreen() {
               transition={{ duration: 3, repeat: Infinity }}
               className="text-[#4ade80]/50 font-bold tracking-[0.2em] text-xs"
             >
-              "Thinking is my greatest weapon."
+              &quot;Thinking is my greatest weapon.&quot;
             </motion.p>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function NaraUltimateScreen() {
       {/* --- OVERLAYS --- */}
       <div className="absolute inset-0 pointer-events-none z-50">
         <div className="absolute inset-0 opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
-        <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[size:100%_4px]" />
+        <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px]" />
       </div>
 
     </div>
