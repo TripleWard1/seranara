@@ -4,47 +4,47 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ASSETS = {
-  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png', // Símbolo que já usamos no HUD
+  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png', 
+  TEST_BG: 'https://cdn2.unrealengine.com/marvel-rivals-gameplay-1920x1080-a6062b61e4b5.jpg' 
 };
 
-export default function FollowerAlert() {
+export default function PremiumFollowerAlert() {
   const [visible, setVisible] = useState(true);
 
-  // Simulação de trigger para teste
   useEffect(() => {
     const timer = setTimeout(() => setVisible(false), 10000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-transparent overflow-hidden">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden font-sans">
+      
+      {/* BACKGROUND DE TESTE - REMOVER PARA PRODUÇÃO */}
+      <div 
+        className="absolute inset-0 z-[-1] bg-cover bg-center opacity-40"
+        style={{ backgroundImage: `url(${ASSETS.TEST_BG})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+      </div>
+
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@700&family=Shojumaru&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@300;700&family=Noto+Sans+JP:wght@900&display=swap');
         
         .font-ninja { font-family: 'Cinzel Decorative', cursive; }
         .font-hud { font-family: 'Space Grotesk', sans-serif; }
-        .font-japan { font-family: 'Shojumaru', cursive; }
+        .font-japan { font-family: 'Noto Sans JP', sans-serif; }
 
-        /* Efeito de fumo denso de invocação */
-        .smoke-poof {
+        .shadow-beam {
           position: absolute;
-          background: radial-gradient(circle, rgba(200, 200, 200, 0.8) 0%, transparent 70%);
-          border-radius: 50%;
-          filter: blur(20px);
+          bottom: -100%;
+          width: 2px;
+          background: linear-gradient(to top, transparent, #4ade80, transparent);
+          filter: drop-shadow(0 0 8px #4ade80);
         }
 
-        /* Animação das sombras táticas */
-        @keyframes shadow-extend {
-          0% { height: 0; opacity: 0; }
-          100% { height: 100vh; opacity: 1; }
-        }
-        .shadow-line {
-          position: absolute;
-          bottom: 0;
-          width: 4px;
-          background: #000;
-          box-shadow: 0 0 15px #4ade80;
-          animation: shadow-extend 0.8s ease-out forwards;
+        /* Efeito de chanfro nas pontas para tirar o aspecto de bloco */
+        .premium-clip {
+          clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
         }
       `}</style>
 
@@ -52,93 +52,118 @@ export default function FollowerAlert() {
         {visible && (
           <div className="relative flex flex-col items-center">
             
-            {/* 1. KAGE MANE (Sombras subindo do fundo do ecrã) */}
-            <div className="absolute bottom-[-50vh] flex gap-8">
-               <div className="shadow-line" style={{ left: '-100px', animationDelay: '0.1s' }} />
-               <div className="shadow-line" style={{ width: '8px', animationDelay: '0s' }} />
-               <div className="shadow-line" style={{ right: '-100px', animationDelay: '0.2s' }} />
+            {/* Sombras Verticais Estilizadas (Shadow Stitching) */}
+            <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+               <motion.div 
+                initial={{ height: 0 }} animate={{ height: '200vh' }}
+                className="shadow-beam" style={{ left: '-150px' }} 
+               />
+               <motion.div 
+                initial={{ height: 0 }} animate={{ height: '250vh' }}
+                className="shadow-beam" style={{ width: '4px' }} 
+               />
+               <motion.div 
+                initial={{ height: 0 }} animate={{ height: '200vh' }}
+                className="shadow-beam" style={{ right: '-150px' }} 
+               />
             </div>
 
-            {/* 2. EFEITO DE FUMO (Invocação) */}
-            <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: [1, 1.5], opacity: [0, 1, 0] }}
-              transition={{ duration: 0.6 }}
-              className="smoke-poof w-64 h-64 z-0"
-            />
-
-            {/* 3. CONTEÚDO PRINCIPAL */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
               className="relative z-10 flex flex-col items-center"
             >
-              {/* Símbolo Nara Giratório */}
-              <motion.img 
-                src={ASSETS.NARA_SYMBOL}
-                className="w-20 h-20 mb-4 invert brightness-[1.5] drop-shadow-[0_0_10px_#4ade80]"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
+              {/* Símbolo Flutuante com Brilho */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative mb-4"
+              >
+                <motion.img 
+                  src={ASSETS.NARA_SYMBOL}
+                  className="w-20 h-20 invert brightness-[2] drop-shadow-[0_0_20px_#4ade80]"
+                  animate={{ rotateY: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                />
+              </motion.div>
 
-              {/* Título Estilo Pergaminho Tático */}
+              {/* Container Principal - Menos "Blocky" */}
               <div className="relative group">
-                {/* Linhas de fecho do Jutsu */}
+                {/* Linhas de Energia Topo/Baixo */}
                 <motion.div 
-                  initial={{ width: 0 }} animate={{ width: '140%' }}
-                  className="absolute top-[-10px] left-[-20%] h-[1px] bg-[#4ade80]" 
+                  initial={{ width: 0, opacity: 0 }} animate={{ width: '120%', opacity: 1 }}
+                  className="absolute -top-2 -left-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#4ade80] to-transparent" 
                 />
-                <motion.div 
-                  initial={{ width: 0 }} animate={{ width: '140%' }}
-                  className="absolute bottom-[-10px] left-[-20%] h-[1px] bg-[#4ade80]" 
-                />
+                
+                {/* O ALERTA (Fundo com gradiente e blur) */}
+                <div className="premium-clip bg-gradient-to-b from-black/40 via-black/80 to-black/40 backdrop-blur-xl px-24 py-10 border-y border-white/10 relative overflow-hidden">
+                  
+                  {/* Reflexo interno para dar profundidade */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#4ade80]/5 to-transparent pointer-events-none" />
 
-                <div className="bg-black/95 px-16 py-6 border-x-4 border-[#4ade80] shadow-[0_0_40px_rgba(74,222,128,0.2)]">
                   <motion.div
-                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-                    className="flex flex-col items-center"
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                    className="flex flex-col items-center relative z-10"
                   >
-                    <span className="font-japan text-[#4ade80] text-sm tracking-[0.5em] mb-2">
+                    <span className="font-japan text-[#4ade80] text-xl tracking-[0.8em] mb-2 drop-shadow-[0_0_8px_rgba(74,222,128,0.5)]">
                       影真似の術
                     </span>
-                    <span className="font-ninja text-white text-xs tracking-[0.3em] opacity-70 mb-1">
-                      INTELLIGENCE REPORT: NEW ALLY
-                    </span>
                     
-                    {/* NOME DO USER */}
-                    <h2 className="font-hud text-5xl font-black text-white tracking-tighter uppercase italic">
-                      <span className="text-[#4ade80]">{'<'}</span> 
-                      USER_NAME 
-                      <span className="text-[#4ade80] font-normal">{' />'}</span>
+                    <div className="flex items-center gap-3 mb-1">
+                      <div className="h-[1px] w-8 bg-[#4ade80]/30" />
+                      <span className="font-hud text-white/50 text-[10px] tracking-[0.5em] uppercase">
+                        Strategic Ally Acquired
+                      </span>
+                      <div className="h-[1px] w-8 bg-[#4ade80]/30" />
+                    </div>
+                    
+                    <h2 className="font-hud text-7xl font-black text-white tracking-tight flex items-center">
+                      <motion.span 
+                        initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
+                        className="text-[#4ade80] mr-2 font-light opacity-50"
+                      >
+                        [
+                      </motion.span>
+                      <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+                        NOME_DO_USER
+                      </span>
+                      <motion.span 
+                        initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
+                        className="text-[#4ade80] ml-2 font-light opacity-50"
+                      >
+                        ]
+                      </motion.span>
                     </h2>
                   </motion.div>
                 </div>
 
-                {/* Tags de Canto (UI Tática) */}
-                <div className="absolute -top-4 -left-4 font-hud text-[10px] text-[#4ade80]">LVL: 07</div>
-                <div className="absolute -bottom-4 -right-4 font-hud text-[10px] text-[#4ade80]">CHAKRA: 100%</div>
+                <motion.div 
+                  initial={{ width: 0, opacity: 0 }} animate={{ width: '120%', opacity: 1 }}
+                  className="absolute -bottom-2 -left-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#4ade80] to-transparent" 
+                />
               </div>
 
-              {/* Frase icónica do Shikamaru */}
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0.6] }}
-                transition={{ delay: 1 }}
-                className="mt-6 font-ninja text-[#4ade80] text-[10px] tracking-widest uppercase"
+              {/* Frase com estilo de legenda de anime */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="mt-6 flex flex-col items-center"
               >
-                "What a drag... but welcome to the team."
-              </motion.p>
+                <p className="font-ninja text-[#4ade80] text-sm italic tracking-widest">
+                   &quot;What a drag... but welcome to the team.&quot;
+                </p>
+                <div className="w-1/2 h-[2px] mt-1 bg-[#4ade80]/20 rounded-full" />
+              </motion.div>
             </motion.div>
 
-            {/* 4. SOMBRA CIRCULAR NO CHÃO */}
+            {/* Brilho de fundo (Glow) */}
             <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="absolute bottom-[-40px] w-48 h-4 bg-black rounded-[100%] blur-md"
-              style={{ boxShadow: '0 0 20px 5px #000' }}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1.5, opacity: 0.15 }}
+              className="absolute z-0 w-[500px] h-[500px] bg-[#4ade80] rounded-full blur-[120px]"
             />
-
           </div>
         )}
       </AnimatePresence>
