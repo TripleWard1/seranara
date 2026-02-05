@@ -42,7 +42,6 @@ export default function PremiumFollowerAlert() {
           filter: drop-shadow(0 0 8px #4ade80);
         }
 
-        /* Efeito de chanfro nas pontas para tirar o aspecto de bloco */
         .premium-clip {
           clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
         }
@@ -52,7 +51,7 @@ export default function PremiumFollowerAlert() {
         {visible && (
           <div className="relative flex flex-col items-center">
             
-            {/* Sombras Verticais Estilizadas (Shadow Stitching) */}
+            {/* Sombras Verticais Estilizadas */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
                <motion.div 
                 initial={{ height: 0 }} animate={{ height: '200vh' }}
@@ -74,7 +73,6 @@ export default function PremiumFollowerAlert() {
               exit={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
               className="relative z-10 flex flex-col items-center"
             >
-              {/* Símbolo Flutuante com Brilho */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -88,18 +86,14 @@ export default function PremiumFollowerAlert() {
                 />
               </motion.div>
 
-              {/* Container Principal - Menos "Blocky" */}
               <div className="relative group">
-                {/* Linhas de Energia Topo/Baixo */}
                 <motion.div 
                   initial={{ width: 0, opacity: 0 }} animate={{ width: '120%', opacity: 1 }}
                   className="absolute -top-2 -left-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#4ade80] to-transparent" 
                 />
                 
-                {/* O ALERTA (Fundo com gradiente e blur) */}
                 <div className="premium-clip bg-gradient-to-b from-black/40 via-black/80 to-black/40 backdrop-blur-xl px-24 py-10 border-y border-white/10 relative overflow-hidden">
                   
-                  {/* Reflexo interno para dar profundidade */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#4ade80]/5 to-transparent pointer-events-none" />
 
                   <motion.div
@@ -118,22 +112,11 @@ export default function PremiumFollowerAlert() {
                       <div className="h-[1px] w-8 bg-[#4ade80]/30" />
                     </div>
                     
-                    <h2 className="font-hud text-7xl font-black text-white tracking-tight flex items-center">
-                      <motion.span 
-                        initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-                        className="text-[#4ade80] mr-2 font-light opacity-50"
-                      >
-                        [
-                      </motion.span>
+                    {/* Espaço reservado para o Streamlabs injetar o nome */}
+                    <h2 className="font-hud text-7xl font-black text-white tracking-tight flex items-center min-h-[1.2em]">
                       <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-                        NOME_DO_USER
+                        {/* O NOME DO USER ENTRA AQUI PELO STREAMLABS */}
                       </span>
-                      <motion.span 
-                        initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-                        className="text-[#4ade80] ml-2 font-light opacity-50"
-                      >
-                        ]
-                      </motion.span>
                     </h2>
                   </motion.div>
                 </div>
@@ -144,7 +127,6 @@ export default function PremiumFollowerAlert() {
                 />
               </div>
 
-              {/* Frase com estilo de legenda de anime */}
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -152,13 +134,12 @@ export default function PremiumFollowerAlert() {
                 className="mt-6 flex flex-col items-center"
               >
                 <p className="font-ninja text-[#4ade80] text-sm italic tracking-widest">
-                   &quot;What a drag... but welcome to the team.&quot;
-                </p>
+   &quot;What a drag... but thanks for the bits!&quot;
+</p>
                 <div className="w-1/2 h-[2px] mt-1 bg-[#4ade80]/20 rounded-full" />
               </motion.div>
             </motion.div>
 
-            {/* Brilho de fundo (Glow) */}
             <motion.div 
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1.5, opacity: 0.15 }}
