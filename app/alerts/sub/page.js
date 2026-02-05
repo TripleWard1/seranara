@@ -4,11 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ASSETS = {
-  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png', 
-  TEST_BG: 'https://cdn2.unrealengine.com/marvel-rivals-gameplay-1920x1080-a6062b61e4b5.jpg' 
+  NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png'
 };
 
-export default function PremiumFollowerAlert() {
+export default function SubAlert() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -19,14 +18,6 @@ export default function PremiumFollowerAlert() {
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden font-sans">
       
-      {/* BACKGROUND DE TESTE - REMOVER PARA PRODUÇÃO */}
-      <div 
-        className="absolute inset-0 z-[-1] bg-cover bg-center opacity-40"
-        style={{ backgroundImage: `url(${ASSETS.TEST_BG})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
-      </div>
-
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@300;700&family=Noto+Sans+JP:wght@900&display=swap');
         
@@ -112,10 +103,8 @@ export default function PremiumFollowerAlert() {
                       <div className="h-[1px] w-8 bg-[#4ade80]/30" />
                     </div>
                     
-                    {/* Espaço reservado para o Streamlabs injetar o nome */}
                     <h2 className="font-hud text-7xl font-black text-white tracking-tight flex items-center min-h-[1.2em]">
                       <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-                        {/* O NOME DO USER ENTRA AQUI PELO STREAMLABS */}
                       </span>
                     </h2>
                   </motion.div>
@@ -133,9 +122,9 @@ export default function PremiumFollowerAlert() {
                 transition={{ delay: 0.8 }}
                 className="mt-6 flex flex-col items-center"
               >
-                <p className="font-ninja text-[#4ade80] text-sm italic tracking-widest">
-   &quot;What a drag... but thanks for the sub!&quot;
-</p>
+                <p className="font-ninja text-[#4ade80] text-sm italic tracking-widest text-center">
+                   &quot;What a drag... but thanks for the sub!&quot;
+                </p>
                 <div className="w-1/2 h-[2px] mt-1 bg-[#4ade80]/20 rounded-full" />
               </motion.div>
             </motion.div>
