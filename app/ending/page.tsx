@@ -121,7 +121,7 @@ export default function NaraUltimateScreen() {
             <div className="flex items-center gap-6">
               <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-[#4ade80]/50" />
               <p className="text-white/80 font-bold tracking-[0.5em] text-lg">
-                NARA CLAN, MATANE !
+                NARA CLAN, MATA NE !
               </p>
               <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-[#4ade80]/50" />
             </div>
