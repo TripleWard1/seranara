@@ -88,7 +88,7 @@ export default function PremiumFollowerAlert() {
                     className="flex flex-col items-center relative z-10"
                   >
                     <span className="font-japan text-[#4ade80] text-xl tracking-[0.8em] mb-2 drop-shadow-[0_0_8px_rgba(74,222,128,0.5)]">
-                      影真似 de 術
+                      影真似の術
                     </span>
                     
                     <div className="flex items-center gap-3 mb-1">
