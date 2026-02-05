@@ -8,7 +8,6 @@ const ASSETS = {
   SHIKAMARU_BODY: 'https://i.imgur.com/zzBQNiq.png',
   SHIKAMARU_HEAD: 'https://i.imgur.com/rq4bWai.png',
   NARA_SYMBOL: 'https://i.imgur.com/tRWhkSk.png',
-  MARVEL_RIVALS_BG: 'https://cdn2.unrealengine.com/marvel-rivals-gameplay-1920x1080-a6062b61e4b5.jpg' 
 };
 
 export default function SeraNaraTacticalHUD() {
@@ -27,24 +26,28 @@ export default function SeraNaraTacticalHUD() {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-black text-white pointer-events-none select-none overflow-hidden font-sans">
+    <div className="fixed inset-0 bg-transparent text-white pointer-events-none select-none overflow-hidden font-sans">
       
-      {/* --- BACKGROUND MARVEL RIVALS --- */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={ASSETS.MARVEL_RIVALS_BG} 
-          alt="Marvel Rivals Background" 
-          className="w-full h-full object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
-      </div>
-
-      {/* --- ESTILOS GLOBAIS --- */}
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@300;500;700&family=Shojumaru&display=swap');
         
         .font-ninja { font-family: 'Cinzel Decorative', cursive; }
         .font-hud { font-family: 'Space Grotesk', sans-serif; }
+
+        .jutsu-smoke {
+          position: absolute;
+          background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(200,200,200,0) 70%);
+          border-radius: 50%;
+          filter: blur(8px);
+          opacity: 0;
+          animation: smoke-rise 3s infinite ease-out;
+        }
+
+        @keyframes smoke-rise {
+          0% { transform: scale(0.5) translateY(10px); opacity: 0; }
+          20% { opacity: 0.6; }
+          100% { transform: scale(2.5) translateY(-40px); opacity: 0; }
+        }
 
         .smoke-effect {
           background: radial-gradient(circle at center, rgba(74, 222, 128, 0.18), transparent 75%);
@@ -115,59 +118,36 @@ export default function SeraNaraTacticalHUD() {
           border-bottom: 2px solid rgba(74, 222, 128, 0.6);
           box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), inset 0 0 20px rgba(74, 222, 128, 0.05);
         }
-
-        .bracket {
-          position: absolute;
-          width: 10px;
-          height: 100%;
-          border-[#4ade80]/40 border-t-2 border-b-2;
-        }
       `}</style>
 
-      {/* --- 1. BARRA SUPERIOR ULTRA PREMIUM --- */}
+      {/* --- 1. BARRA SUPERIOR --- */}
       <div className="absolute top-0 left-0 w-full flex justify-center z-50"> 
-        
-        {/* Aura de fundo da barra */}
         <div className="absolute top-0 w-[60%] h-20 bg-[#4ade80]/5 blur-[60px] rounded-full" />
 
         <div className="relative flex items-start gap-0 pt-1"> 
-          
-          {/* LADO ESQUERDO */}
           <div className="mt-0 relative group"> 
              <div className="chakra-dot left-10 top-6" />
              <div className="chakra-dot left-24 top-2" style={{ animationDelay: '2s' }} />
-             
-             {/* Conector Visual */}
              <div className="absolute right-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#4ade80] to-transparent opacity-40" />
-             
              <TacticalWing side="left">
                 <StatItem icon={<User size={14} />} label="LAST SUB" color="#4ade80" />
-                <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-10 rotate-[20deg]" />
+                <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-10 rotate-[20deg] mt-[-20px]" />
                 <StatItem icon={<Heart size={14} />} label="LAST FOLLOWER" color="#4ade80" />
              </TacticalWing>
           </div>
 
-          {/* CENTRO (SERA NARA) */}
           <div className="relative flex flex-col items-center z-20 mx-[-10px]"> 
              <div className="konoha-leaf left-[-40px] top-0" style={{ animationDelay: '0s' }} />
              <div className="konoha-leaf right-[-40px] top-0" style={{ animationDelay: '3.5s' }} />
-
              <div className="h-16 flex flex-col justify-center items-center px-24 glass-premium clip-path-trapezoid relative overflow-hidden">
                 <div className="radar-scan" />
                 <div className="smoke-effect absolute inset-0 pointer-events-none" />
-                
-                {/* Brackets táticos nos cantos internos */}
                 <div className="absolute left-6 top-3 w-2 h-2 border-l border-t border-[#4ade80]" />
                 <div className="absolute right-6 top-3 w-2 h-2 border-r border-t border-[#4ade80]" />
-
                 <div className="flex flex-col items-center z-10">
                    <motion.div
                       animate={{ 
-                        textShadow: [
-                          "0 0 15px rgba(74, 222, 128, 0.6)",
-                          "0 0 25px rgba(74, 222, 128, 0.9)",
-                          "0 0 15px rgba(74, 222, 128, 0.6)"
-                        ]
+                        textShadow: ["0 0 15px rgba(74, 222, 128, 0.6)", "0 0 25px rgba(74, 222, 128, 0.9)", "0 0 15px rgba(74, 222, 128, 0.6)"]
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
                    >
@@ -175,7 +155,6 @@ export default function SeraNaraTacticalHUD() {
                         SERA <span className="text-[#4ade80]">NARA</span>
                      </h1>
                    </motion.div>
-                   
                    <div className="flex items-center gap-3 mt-2">
                       <div className="flex gap-1">
                         {[1,2,3].map(i => (
@@ -193,25 +172,20 @@ export default function SeraNaraTacticalHUD() {
              </div>
           </div>
 
-          {/* LADO DIREITO */}
           <div className="mt-0 relative group"> 
              <div className="chakra-dot right-10 top-6" style={{ animationDelay: '1.5s' }} />
              <div className="chakra-dot right-24 top-2" style={{ animationDelay: '4s' }} />
-             
-             {/* Conector Visual */}
              <div className="absolute left-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#4ade80] to-transparent opacity-40" />
-
              <TacticalWing side="right">
                 <StatItem icon={<DollarSign size={14} />} label="DONATION" color="#4ade80" />
-                <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-10 rotate-[-20deg]" />
+                <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-[#4ade80]/50 to-transparent mx-10 rotate-[-20deg] mt-[-20px]" />
                 <StatItem icon={<Zap size={14} />} label="BITS" color="#4ade80" />
              </TacticalWing>
           </div>
-
         </div>
       </div>
 
-      {/* --- 2. WEBCAM TÁTICA (Inalterada) --- */}
+      {/* --- 2. WEBCAM TÁTICA --- */}
       <div className="absolute top-36 left-12 z-40">
         <div className="relative w-[400px] aspect-video group">
            <div className="absolute -inset-4 smoke-effect opacity-30 pointer-events-none rounded-full blur-xl" />
@@ -219,10 +193,14 @@ export default function SeraNaraTacticalHUD() {
            <CornerMarker position="tr" />
            <CornerMarker position="bl" />
            <CornerMarker position="br" />
-
            <div className="absolute -left-4 -bottom-8 z-50 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-0 opacity-40 pointer-events-none">
-                 <img src={ASSETS.NARA_SYMBOL} alt="Nara Clan" className="w-full h-full object-contain rotate-[-10deg] invert brightness-[1.8] contrast-100" />
+                 <img src={ASSETS.NARA_SYMBOL} alt="Nara Clan" className="w-full h-full object-contain rotate-[-10deg] invert brightness-[1.8]" />
+              </div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-20 pointer-events-none z-0">
+                 <div className="jutsu-smoke w-16 h-16 left-0 bottom-0" style={{ animationDelay: '0s' }} />
+                 <div className="jutsu-smoke w-12 h-12 left-8 bottom-2" style={{ animationDelay: '1s' }} />
+                 <div className="jutsu-smoke w-14 h-14 right-2 bottom-0" style={{ animationDelay: '2s' }} />
               </div>
               <motion.img
                  src={ASSETS.SHIKAMARU_BODY}
@@ -234,7 +212,6 @@ export default function SeraNaraTacticalHUD() {
            </div>
         </div>
       </div>
-
     </div>
   );
 }
@@ -248,7 +225,6 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
 
   return (
     <div className={`h-16 flex items-center px-12 border-b-2 border-[#4ade80]/50 backdrop-blur-2xl ${skew} ${gradient} relative overflow-hidden group`}>
-       {/* Glow interno ao passar o mouse ou aleatório */}
        <div className="absolute inset-0 bg-[#4ade80]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
        <div className={`flex items-center ${unSkew} w-full justify-between relative z-10`}>
           {children}
@@ -258,13 +234,12 @@ const TacticalWing = ({ children, side }: { children: React.ReactNode, side: 'le
 };
 
 const StatItem = ({ icon, label, color }: { icon: any, label: string, color: string }) => (
-  <div className="flex flex-col items-center min-w-[110px] group -mt-2">
-     <div className="flex items-center gap-2 mb-1">
+  <div className="flex flex-col items-center min-w-[110px] group -mt-5">
+     <div className="flex items-center gap-2">
         <span style={{ color }}>{icon}</span>
         <span className="font-hud text-[10px] font-bold tracking-[0.3em] text-white/90 group-hover:text-white transition-colors">{label}</span>
      </div>
-     {/* Barra de Status Inferior (Chakra Gauge) */}
-     <div className="w-full h-[3px] bg-black/50 rounded-full overflow-hidden border border-white/5">
+     <div className="w-full h-[3px] bg-black/50 rounded-full overflow-hidden border border-white/5 mt-1">
         <motion.div 
           className="h-full bg-[#4ade80]"
           initial={{ width: "30%" }}
